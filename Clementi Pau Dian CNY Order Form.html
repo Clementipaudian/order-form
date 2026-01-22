@@ -12,29 +12,10 @@ box-sizing: border-box;
 }
 
 @media print {
-body { 
-    margin: 0; 
-    padding: 8px; 
-    font-size: 11px;
-}
+body { margin: 0; padding: 8px; }
 .no-print { display: none; }
-input { 
-    border: none !important; 
-    border-bottom: 1px solid #333 !important; 
-    background: transparent !important;
-}
-table { 
-    page-break-inside: avoid; 
-    font-size: 12px;
-}
-.col-product { font-size: 15px !important; font-weight: 600; }
-.col-size { font-size: 13px !important; font-weight: 500; }
-.col-price { font-size: 14px !important; font-weight: 700; }
-th { font-size: 12px !important; }
-@page { 
-    size: A5 landscape; 
-    margin: 0.5cm; 
-}
+input { border: none !important; border-bottom: 1px solid #333 !important; }
+table { page-break-inside: avoid; }
 }
 
 body {
@@ -169,50 +150,39 @@ padding: 6px 3px;
 text-align: center;
 font-weight: bold;
 border: 1px solid #999;
-font-size: 11px;
+font-size: 9px;
 }
 
 td {
-padding: 6px 4px;
+padding: 4px 3px;
 border: 1px solid #ddd;
 text-align: center;
-height: 28px;
-vertical-align: middle;
 }
 
 .col-num {
 width: 4%;
 font-weight: bold;
-font-size: 11px;
 }
 
 .col-product {
 width: 38%;
 text-align: left;
-padding-left: 8px;
-font-size: 14px;
-font-weight: 600;
-line-height: 1.1;
+padding-left: 6px;
 }
 
 .col-size {
 width: 22%;
-font-size: 12px;
-color: #555;
-font-weight: 500;
-line-height: 1.1;
+font-size: 9px;
+color: #666;
 }
 
 .col-price {
 width: 11%;
-font-size: 13px;
-font-weight: 700;
-line-height: 1.1;
+font-weight: bold;
 }
 
 .col-editable {
 width: 8%;
-font-size: 11px;
 }
 
 .qty-input, .amount-input {
@@ -482,4 +452,272 @@ border-radius: 4px;
 <td class="col-product">Pork Ribs</td>
 <td class="col-size">500g</td>
 <td class="col-price">$6.20</td>
-<td class="col-editable
+<td class="col-editable"><input type="number" class="qty-input" data-price="6.2" placeholder="0" min="0"></td>
+<td class="col-editable"><input type="text" class="amount-input" placeholder="$0.00" readonly=""></td>
+</tr>
+<tr>
+<td class="col-num">7</td>
+<td class="col-product">Chicken Feet</td>
+<td class="col-size">500g</td>
+<td class="col-price">$6.20</td>
+<td class="col-editable"><input type="number" class="qty-input" data-price="6.2" placeholder="0" min="0"></td>
+<td class="col-editable"><input type="text" class="amount-input" placeholder="$0.00" readonly=""></td>
+</tr>
+<tr>
+<td class="col-num">8</td>
+<td class="col-product">Shrimp On Leaf</td>
+<td class="col-size">8 PCS/TRAY</td>
+<td class="col-price">$5.00</td>
+<td class="col-editable"><input type="number" class="qty-input" data-price="5.0" placeholder="0" min="0"></td>
+<td class="col-editable"><input type="text" class="amount-input" placeholder="$0.00" readonly=""></td>
+</tr>
+<tr>
+<td class="col-num">9</td>
+<td class="col-product">Chicken Shrimp Roll</td>
+<td class="col-size">10 PCS/TRAY</td>
+<td class="col-price">$5.00</td>
+<td class="col-editable"><input type="number" class="qty-input" data-price="5.0" placeholder="0" min="0"></td>
+<td class="col-editable"><input type="text" class="amount-input" placeholder="$0.00" readonly=""></td>
+</tr>
+<tr>
+<td class="col-num">10</td>
+<td class="col-product">Cuttlefish Shrimp Roll</td>
+<td class="col-size">10 PCS/TRAY</td>
+<td class="col-price">$7.50</td>
+<td class="col-editable"><input type="number" class="qty-input" data-price="7.5" placeholder="0" min="0"></td>
+<td class="col-editable"><input type="text" class="amount-input" placeholder="$0.00" readonly=""></td>
+</tr>
+<tr>
+<td class="col-num">11</td>
+<td class="col-product">Prawn Dumpling</td>
+<td class="col-size">10 PCS/TRAY</td>
+<td class="col-price">$5.00</td>
+<td class="col-editable"><input type="number" class="qty-input" data-price="5.0" placeholder="0" min="0"></td>
+<td class="col-editable"><input type="text" class="amount-input" placeholder="$0.00" readonly=""></td>
+</tr>
+<tr>
+<td class="col-num">12</td>
+<td class="col-product">Beancurd Roll</td>
+<td class="col-size">10 PCS/TRAY</td>
+<td class="col-price">$5.00</td>
+<td class="col-editable"><input type="number" class="qty-input" data-price="5.0" placeholder="0" min="0"></td>
+<td class="col-editable"><input type="text" class="amount-input" placeholder="$0.00" readonly=""></td>
+</tr>
+<tr>
+<td class="col-num">13</td>
+<td class="col-product">Big Pork Pau</td>
+<td class="col-size">4's x 160g/PKT</td>
+<td class="col-price">$5.60</td>
+<td class="col-editable"><input type="number" class="qty-input" data-price="5.6" placeholder="0" min="0"></td>
+<td class="col-editable"><input type="text" class="amount-input" placeholder="$0.00" readonly=""></td>
+</tr>
+<tr>
+<td class="col-num">14</td>
+<td class="col-product">Small Pork Pau</td>
+<td class="col-size">6's x 60g/PKT</td>
+<td class="col-price">$4.00</td>
+<td class="col-editable"><input type="number" class="qty-input" data-price="4.0" placeholder="0" min="0"></td>
+<td class="col-editable"><input type="text" class="amount-input" placeholder="$0.00" readonly=""></td>
+</tr>
+<tr>
+<td class="col-num">15</td>
+<td class="col-product">Big Chicken Pau</td>
+<td class="col-size">4's x 160g/PKT</td>
+<td class="col-price">$5.60</td>
+<td class="col-editable"><input type="number" class="qty-input" data-price="5.6" placeholder="0" min="0"></td>
+<td class="col-editable"><input type="text" class="amount-input" placeholder="$0.00" readonly=""></td>
+</tr>
+<tr>
+<td class="col-num">16</td>
+<td class="col-product">Small Chicken Pau</td>
+<td class="col-size">6's x 60g/PKT</td>
+<td class="col-price">$4.00</td>
+<td class="col-editable"><input type="number" class="qty-input" data-price="4.0" placeholder="0" min="0"></td>
+<td class="col-editable"><input type="text" class="amount-input" placeholder="$0.00" readonly=""></td>
+</tr>
+<tr>
+<td class="col-num">17</td>
+<td class="col-product">BBQ Pork Pau</td>
+<td class="col-size">6's x 50g/PKT</td>
+<td class="col-price">$4.00</td>
+<td class="col-editable"><input type="number" class="qty-input" data-price="4.0" placeholder="0" min="0"></td>
+<td class="col-editable"><input type="text" class="amount-input" placeholder="$0.00" readonly=""></td>
+</tr>
+<tr>
+<td class="col-num">18</td>
+<td class="col-product">Pork Belly Pau</td>
+<td class="col-size">6's x 75g/PKT</td>
+<td class="col-price">$6.60</td>
+<td class="col-editable"><input type="number" class="qty-input" data-price="6.6" placeholder="0" min="0"></td>
+<td class="col-editable"><input type="text" class="amount-input" placeholder="$0.00" readonly=""></td>
+</tr>
+<tr>
+<td class="col-num">19</td>
+<td class="col-product">Vegetable Pau</td>
+<td class="col-size">6's x 85g/PKT</td>
+<td class="col-price">$4.00</td>
+<td class="col-editable"><input type="number" class="qty-input" data-price="4.0" placeholder="0" min="0"></td>
+<td class="col-editable"><input type="text" class="amount-input" placeholder="$0.00" readonly=""></td>
+</tr>
+<tr>
+<td class="col-num">20</td>
+<td class="col-product">Red Bean Pau</td>
+<td class="col-size">6's x 50g/PKT</td>
+<td class="col-price">$3.60</td>
+<td class="col-editable"><input type="number" class="qty-input" data-price="3.6" placeholder="0" min="0"></td>
+<td class="col-editable"><input type="text" class="amount-input" placeholder="$0.00" readonly=""></td>
+</tr>
+<tr>
+<td class="col-num">21</td>
+<td class="col-product">Lotus Paste Pau</td>
+<td class="col-size">6's x 50g/PKT</td>
+<td class="col-price">$3.60</td>
+<td class="col-editable"><input type="number" class="qty-input" data-price="3.6" placeholder="0" min="0"></td>
+<td class="col-editable"><input type="text" class="amount-input" placeholder="$0.00" readonly=""></td>
+</tr>
+
+<tr>
+</tbody>
+</table>
+</div>
+
+<!-- Totals -->
+<div class="totals">
+<div class="total-row">
+<label>Subtotal:</label>
+<input type="text" id="subtotal" value="$0.00" readonly="">
+</div>
+<div class="total-row">
+<label>Delivery Fee:</label>
+<input type="text" id="deliveryFee" placeholder="$0.00">
+</div>
+<div class="total-row">
+<label style="color: #DC143C;">TOTAL:</label>
+<input type="text" id="totalAmount" value="$0.00" readonly="" style="background: #FFB6C1; font-size: 11px;">
+</div>
+</div>
+
+<!-- Notes -->
+<div class="section">
+<div class="notes">
+<label>📝 Notes / Special Requests:</label>
+<textarea id="notes" placeholder="E.g., Deliver after 2pm, Extra packaging, etc."></textarea>
+</div>
+</div>
+
+<!-- Buttons -->
+<div class="button-group no-print">
+<button class="btn-calculate" onclick="calculateTotals()">💰 Calculate</button>
+<button class="btn-clear" onclick="clearForm()">🔄 Clear</button>
+<button class="btn-print" onclick="printForm()">🖨️ Print PDF</button>
+<button class="btn-whatsapp" onclick="openWhatsApp()">💬 WhatsApp</button>
+</div>
+
+<div class="success-msg" id="successMsg">✅ Totals calculated! Ready to print or share.</div>
+
+<!-- Footer -->
+<div class="footer">
+<p><strong>🏪 Clementi Pau Dian Pte Ltd (金文泰飽點有限公司)</strong></p>
+<p>Jurong Food Hub, 15 Jalan Tepong #01-23, Singapore 619336</p>
+<p style="font-size: 8px;">Tel: (65) 6896 9030 | Email: clementipaudian88@gmail.com</p>
+<p style="margin-top: 6px; color: #25D366;"><strong>📱 WhatsApp Orders: 91831698</strong></p>
+</div>
+</div>
+
+<script>
+// Set today's date
+document.getElementById('orderDate').valueAsDate = new Date();
+
+// Calculate totals when quantities change
+document.querySelectorAll('.qty-input').forEach(function(input) {
+input.addEventListener('change', calculateTotals);
+input.addEventListener('blur', calculateTotals);
+});
+
+document.getElementById('deliveryFee').addEventListener('change', calculateTotals);
+
+function calculateTotals() {
+let subtotal = 0;
+
+document.querySelectorAll('.qty-input').forEach(function(input) {
+const qty = parseFloat(input.value) || 0;
+const price = parseFloat(input.dataset.price);
+const amount = qty * price;
+
+// Update amount field
+const amountField = input.closest('tr').querySelector('.amount-input');
+amountField.value = amount > 0 ? '$' + amount.toFixed(2) : '';
+
+subtotal += amount;
+});
+
+// Update subtotal
+document.getElementById('subtotal').value = '$' + subtotal.toFixed(2);
+
+// Calculate total with delivery fee
+const deliveryFee = parseFloat(document.getElementById('deliveryFee').value) || 0;
+const total = subtotal + deliveryFee;
+document.getElementById('totalAmount').value = '$' + total.toFixed(2);
+
+// Show success message
+document.getElementById('successMsg').style.display = 'block';
+setTimeout(function() {
+document.getElementById('successMsg').style.display = 'none';
+}, 3000);
+}
+
+function clearForm() {
+if (confirm('Clear all fields?')) {
+document.querySelectorAll('input, textarea').forEach(function(field) {
+if (field.type !== 'checkbox' && field.type !== 'radio' && !field.hasAttribute('readonly')) {
+field.value = '';
+}
+});
+document.getElementById('orderDate').valueAsDate = new Date();
+calculateTotals();
+}
+}
+
+function printForm() {
+window.print();
+}
+
+function openWhatsApp() {
+const name = document.getElementById('customerName').value || '[Name]';
+const phone = document.getElementById('customerPhone').value || '[Phone]';
+const total = document.getElementById('totalAmount').value;
+const notes = document.getElementById('notes').value || '';
+
+let itemsList = '';
+let hasItems = false;
+document.querySelectorAll('.qty-input').forEach(function(input) {
+const qty = parseFloat(input.value) || 0;
+if (qty > 0) {
+hasItems = true;
+const productName = input.closest('tr').querySelector('.col-product').textContent;
+const price = input.closest('tr').querySelector('.col-price').textContent;
+itemsList += '\\n- ' + productName + ' (Qty: ' + qty + ', Price: ' + price + ')';
+}
+});
+
+if (!hasItems) {
+alert('Please enter quantities for at least one item');
+return;
+}
+
+const message = encodeURIComponent(
+'Hello Clementi Pau Dian,\\n\\n' +
+'I would like to place a CNY order:\\n\\n' +
+'Name: ' + name + '\\n' +
+'Contact: ' + phone + '\\n' +
+'Total Amount: ' + total +
+(notes ? '\\n\\nSpecial Requests:\\n' + notes : '') +
+'\\n\\nPlease confirm availability and delivery details.\\n\\nThank you!'
+);
+
+window.open('https://wa.me/6591831698?text=' + message, '_blank');
+}
+</script>
+
+
+</body></html>
