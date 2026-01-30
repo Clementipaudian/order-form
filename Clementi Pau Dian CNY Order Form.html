@@ -103,6 +103,7 @@
     flex: 1 1 auto;   /* expand to occupy remaining vertical space */
     overflow: hidden; /* no scrollbars on sheet */
     display: block;
+    position: relative;
   }
 
   table {
@@ -111,6 +112,7 @@
     table-layout: fixed;
     font-size: 10px;      /* small so all rows fit */
     color: #111;
+    transform-origin: top left;
   }
 
   thead th {
@@ -182,6 +184,14 @@
 
   /* Ensure long product names wrap */
   .col-product { word-break: break-word; white-space: normal; }
+
+  /* Reduced table padding / font when we need to fit many rows */
+  .table-tight thead th { padding: 3px 2px; font-size: 8.5px; }
+  .table-tight tbody td { padding: 2px 3px; font-size: 8.5px; }
+  .table-tight .pname { font-size: 9px; font-weight:700; line-height:1.02; }
+
+  /* Fallback min font size */
+  .table-min tbody td, .table-min thead th { font-size: 8px !important; padding: 1px 2px !important; }
 </style>
 </head>
 <body>
@@ -221,7 +231,7 @@
       </div>
 
       <!-- Products Table (must fit within the sheet area) -->
-      <div class="table-area" role="region" aria-label="Product list">
+      <div class="table-area" id="tableArea" role="region" aria-label="Product list">
         <table id="productTable" role="table" aria-label="Order items">
           <thead>
             <tr>
@@ -288,9 +298,12 @@
   </div>
 
 <script>
-  // Fit sheet to viewport by scaling while preserving A5 dimensions.
+  // Fit sheet to viewport by scaling while preserving A5 dimensions,
+  // and ensure the product list (21 rows) is visible in one glance by reducing table font/paddings if necessary.
   (function() {
     const sheet = document.getElementById('sheet');
+    const productTable = document.getElementById('productTable');
+    const tableArea = document.getElementById('tableArea');
 
     function fitSheet() {
       // available viewport minus a small margin
@@ -302,12 +315,14 @@
       // compute scale so entire sheet fits with preserved aspect ratio
       const scale = Math.min(availW / sheetW, availH / sheetH, 1);
       sheet.style.transform = 'scale(' + scale + ')';
-    }
 
-    // Run on load and on resize / orientation change
-    window.addEventListener('load', fitSheet);
-    window.addEventListener('resize', fitSheet);
-    window.addEventListener('orientationchange', fitSheet);
+      // After sheet scaling has been applied, allow a short delay and then fit the table inside the sheet
+      // (the sheet transform affects measured sizes so we wait a tick).
+      requestAnimationFrame(() => {
+        // run twice to ensure layout stabilized
+        requestAnimationFrame(fitTableToArea);
+      });
+    }
 
     // Initialize date
     const dateInput = document.getElementById('orderDate');
@@ -329,11 +344,11 @@
       document.getElementById('totalAmount').value = '$' + (subtotal + delivery).toFixed(2);
     }
 
-    // Wire events
+    // Wire events for qty inputs & delivery fee
     document.querySelectorAll('.qty-input').forEach(function(input) {
-      input.addEventListener('input', calculateTotals);
-      input.addEventListener('change', calculateTotals);
-      input.addEventListener('blur', calculateTotals);
+      input.addEventListener('input', () => { calculateTotals(); /* keep table fit in case of layout changes */ fitTableToArea(); });
+      input.addEventListener('change', () => { calculateTotals(); fitTableToArea(); });
+      input.addEventListener('blur', () => { calculateTotals(); fitTableToArea(); });
     });
     const deliveryFee = document.getElementById('deliveryFee');
     if (deliveryFee) deliveryFee.addEventListener('input', calculateTotals);
@@ -343,6 +358,69 @@
       // if sheet is scaled down, allow wheel events to pass through only inside inputs; otherwise prevent page-level scroll
       e.preventDefault();
     }, { passive: false });
+
+    // Function to shrink table font and paddings until the table fits inside the tableArea.
+    function fitTableToArea() {
+      if (!productTable || !tableArea) return;
+
+      // Clear any classes so measurements start from default state
+      productTable.classList.remove('table-tight', 'table-min');
+
+      // We will try a progressive strategy:
+      // 1) If table height <= area, do nothing.
+      // 2) If not, apply .table-tight (reduced padding & font).
+      // 3) If still not fit, apply .table-min (more aggressive).
+      // This preserves legibility while ensuring all rows are visible.
+
+      // Measure function that accounts for transforms on sheet:
+      function measuredTableHeight() {
+        // productTable.getBoundingClientRect returns on-screen size taking into account sheet scaling.
+        // We need to compare the on-screen table height with the on-screen tableArea height.
+        const tableRect = productTable.getBoundingClientRect();
+        const areaRect = tableArea.getBoundingClientRect();
+        return { tableH: tableRect.height, areaH: areaRect.height };
+      }
+
+      // Try default
+      let m = measuredTableHeight();
+      if (m.tableH <= m.areaH - 2) {
+        // fits already
+        return;
+      }
+
+      // Apply tighter spacing first
+      productTable.classList.add('table-tight');
+      // Force reflow and measure again
+      m = measuredTableHeight();
+      if (m.tableH <= m.areaH - 2) return;
+
+      // As a final fallback, apply more aggressive min font/padding
+      productTable.classList.add('table-min');
+      m = measuredTableHeight();
+      if (m.tableH <= m.areaH - 2) return;
+
+      // If it still doesn't fit (very narrow viewports), we'll scale the table slightly so it becomes visible.
+      // Compute scale factor (on-screen)
+      const scaleNeeded = (m.areaH - 2) / m.tableH;
+      const finalScale = Math.min(1, scaleNeeded);
+
+      // Apply transform scale to the table as last resort
+      // We're already using CSS transform-origin: top left; scaling both axes preserves layout.
+      productTable.style.transform = 'scale(' + finalScale + ')';
+      productTable.style.transformOrigin = 'top left';
+
+      // When scaled down, table will visually shrink in width; to avoid layout overflow we keep its container hidden overflow.
+      // No need to change widths — the sheet layout remains consistent.
+    }
+
+    // When resizing the viewport, re-run fitSheet and ensure table fits
+    window.addEventListener('load', () => { fitSheet(); calculateTotals(); });
+    window.addEventListener('resize', () => { fitSheet(); });
+    window.addEventListener('orientationchange', () => { setTimeout(fitSheet, 100); });
+
+    // Also run once after fonts/DOM are stable
+    setTimeout(() => { fitSheet(); calculateTotals(); }, 200);
+
   })();
 </script>
 </body>
